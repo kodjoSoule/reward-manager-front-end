@@ -1,0 +1,39 @@
+<!-- benefit-restaurant-list.component.html -->
+
+<h2>Liste des Restaurants</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Numéro du marchand</th>
+      <th>Nom</th>
+      <th>Pourcentage d'avantage</th>
+      <th>Politique de disponibilité</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let restaurant of restaurants">
+      <td>{{ restaurant.merchant_number }}</td>
+      <td>{{ restaurant.name }}</td>
+      <td>{{ restaurant.benefit_percentage }}</td>
+      <td>{{ restaurant.benefit_availability_policy }}</td>
+      <td>
+        <button
+          class="btn btn-primary"
+          (click)="updateAvailability(restaurant.merchant_number, 'allowed')"
+        >
+          Activer
+        </button>
+        <button
+          class="btn btn-danger"
+          (click)="
+            updateAvailability(restaurant.merchant_number, 'not_allowed')
+          "
+        >
+          Suspendre
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

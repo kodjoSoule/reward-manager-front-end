@@ -1,0 +1,16 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title">{{ restaurant.name }}</h5>
+    <p class="card-text">
+      Merchant Number: {{ restaurant.merchant_number }}<br />
+      Benefit Percentage: {{ restaurant.benefit_percentage }}%<br />
+      Availability Policy: {{ restaurant.benefit_availability_policy }}
+    </p>
+    <button class="btn btn-primary" (click)="viewDetails()">
+      View Details
+    </button>
+    <button class="btn btn-danger" (click)="updateAvailability()">
+      Update Availability
+    </button>
+  </div>
+</div>
