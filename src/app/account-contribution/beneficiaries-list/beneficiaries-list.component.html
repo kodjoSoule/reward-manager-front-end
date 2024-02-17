@@ -1,1 +1,23 @@
-<p>beneficiaries-list works!</p>
+<!-- beneficiaries-list.component.html -->
+<h5 class="mt-3">Liste des Bénéficiaires</h5>
+<div *ngIf="beneficiaries && beneficiaries.length > 0">
+  <ul>
+    <li class="mb-5" *ngFor="let beneficiary of beneficiaries">
+      <hr />
+      <span>Nom : {{ beneficiary.name }} - </span><br />
+      <span>Pourcentage : {{ beneficiary.percentage }} % - </span>
+      <!-- Bouton pour mettre à jour le pourcentage -->
+      <button
+        class="me-5 btn btn-secondary"
+        (click)="updatePercentage(beneficiary)"
+      >
+        Mise à jour
+      </button>
+      <br />
+      <span
+        >Économies :
+        {{ beneficiary.savings | currency : "EUR" : "symbol" : "1.2-2" }} </span
+      ><br />
+    </li>
+  </ul>
+</div>

@@ -1,1 +1,26 @@
-<p>update-beneficiary works!</p>
+<!-- update-beneficiary.component.html -->
+<form (ngSubmit)="updateBeneficiary()" class="col-md-8 p-4">
+  <div class="form-group">
+    <label for="updatedAllocationPercentage"
+      >Nouveau Pourcentage d'Allocation</label
+    >
+    <input
+      type="number"
+      id="updatedAllocationPercentage"
+      name="updatedAllocationPercentage"
+      class="form-control mb-2"
+      [(ngModel)]="updatedAllocationPercentage"
+      required
+    />
+  </div>
+  <div class="d-flex justify-content-end">
+    <button type="submit" class="btn btn-primary mb-2">Mettre à Jour</button>
+    <button
+      type="button"
+      class="btn btn-secondary ms-2 mb-2"
+      (click)="closeModal()"
+    >
+      Fermer
+    </button>
+  </div>
+</form>

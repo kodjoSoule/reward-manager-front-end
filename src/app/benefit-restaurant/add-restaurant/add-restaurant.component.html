@@ -1,1 +1,83 @@
-<p>add-restaurant works!</p>
+<!-- add-restaurant.component.html -->
+
+<div class="container mt-4 p-2">
+  <h2>Ajouter un Restaurant</h2>
+
+  <form (ngSubmit)="addRestaurant()" #myform="ngForm">
+    <div class="mb-3">
+      <label for="merchantNumber" class="form-label">Numéro du marchand</label>
+      <input
+        type="text"
+        class="form-control"
+        id="merchantNumber"
+        name="merchant_number"
+        [(ngModel)]="newRestaurant.merchant_number"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="restaurantName" class="form-label">Nom du Restaurant</label>
+      <input
+        type="text"
+        class="form-control"
+        id="restaurantName"
+        name="name"
+        [(ngModel)]="newRestaurant.name"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="benefitPercentage" class="form-label"
+        >Pourcentage d'avantage</label
+      >
+      <div class="input-group">
+        <input
+          type="number"
+          class="form-control"
+          id="benefitPercentage"
+          name="benefit_percentage"
+          [(ngModel)]="newRestaurant.benefit_percentage"
+          required
+        />
+        <span class="input-group-text">%</span>
+      </div>
+    </div>
+
+    <!-- <div class="mb-3">
+      <label for="availabilityPolicy" class="form-label"
+        >Politique de disponibilité</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="availabilityPolicy"
+        [(ngModel)]="newRestaurant.benefit_availability_policy"
+        required
+      />
+    </div> -->
+
+    <div class="mb-3">
+      <label for="availabilityPolicy" class="form-label"
+        >Politique de disponibilité</label
+      >
+      <select
+        class="form-select"
+        id="availabilityPolicy"
+        name="benefit_availability_policy"
+        [(ngModel)]="newRestaurant.benefit_availability_policy"
+        required
+      >
+        <option value="allow">Autoriser</option>
+        <option value="no_allow">Non autoriser</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Ajouter le Restaurant</button>
+
+    <!-- Bouton pour fermer le formulaire -->
+    <button type="button" class="btn btn-secondary ms-2" (click)="closeModal()">
+      Fermer
+    </button>
+  </form>
+</div>

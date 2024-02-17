@@ -1,3 +1,4 @@
+<!-- header.component.html -->
 <nav
   class="navbar navbar-expand-lg navbar-light bg-light rounded"
   aria-label="Navbar example"
@@ -5,12 +6,12 @@
   <div class="container">
     <a class="navbar-brand" routerLink="/home">
       <img
-        class="mb-4 mx-auto my-auto img-fluid rounded-circle border border-3 border-primary"
+        class="mb-2 mx-auto my-auto img-fluid rounded-circle border border-3 border-primary"
         src="assets/images/restaurant_food.jpg"
-        width="50"
+        width="70"
         alt="Logo"
       />
-      <span>Plan Épargne Restaurant</span>
+      <span class="ms-2">Plan Épargne Restaurant</span>
     </a>
 
     <button
@@ -26,21 +27,53 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link btn btn-light" routerLink="/home">Accueil</a>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link btn btn-dark" routerLink="/home">Accueil</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" routerLinkActive="active">
           <a
             class="nav-link btn btn-light"
             routerLink="/benefit-restaurant-list"
             >Restaurants</a
           >
         </li>
-        <!-- Ajoutez d'autres liens de navigation ici en suivant la structure ci-dessus -->
-        <!-- <li class="nav-item">
+        <!-- Add more navigation links here following the same structure -->
+        <li
+          class="nav-item"
+          routerLinkActive="active"
+          *ngIf="isAuthenticated()"
+        >
+          <a class="nav-link btn btn-light" routerLink="/reward-manager"
+            >Gestion des récompenses</a
+          >
+        </li>
+
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link btn btn-light" routerLink="/account-contribution"
+            >Contributions aux comptes</a
+          >
+        </li>
+        <li class="nav-item" routerLinkActive="active">
           <a class="nav-link btn btn-light" routerLink="/about">À propos</a>
-        </li> -->
+        </li>
+
+        <!-- //<li class="nav-item" *ngIf="!isAuthenticated()"> -->
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link btn btn-light" routerLink="/administration"
+            >Administration</a
+          >
+        </li>
+
+        <li class="nav-item" *ngIf="!isAuthenticated()">
+          <a class="nav-link btn btn-light" routerLink="/login">Se Connecter</a>
+        </li>
+
+        <li class="nav-item" *ngIf="isAuthenticated()">
+          <a class="nav-link btn btn-light" (click)="logout()"
+            >Se Deconnecter</a
+          >
+        </li>
       </ul>
     </div>
   </div>

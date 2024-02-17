@@ -1,1 +1,14 @@
-<p>reward-info works!</p>
+<div class="container mt-4">
+  <h2 class="text-primary">Détails de la Récompense</h2>
+
+  <div *ngIf="rewardDetails">
+    <h3>Récompense n°{{ rewardDetails.reward_confirmation_number }}</h3>
+    <p>
+      Montant:
+      {{ rewardDetails.reward_amount }}
+    </p>
+    <p>Marchand: {{ rewardDetails.merchant_number }}</p>
+    <p>Date de la récompense: {{ rewardDetails.reward_date }}</p>
+    <!-- Ajoutez d'autres détails si nécessaire -->
+  </div>
+</div>

@@ -3,57 +3,34 @@ import { BenefitRestaurantService } from '../benefit-restaurant.service';
 import { RestauBenefitRestaurant } from '../RestauBenefitRestaurant';
 import { RouterModule } from '@angular/router';
 import { CommonModule, DatePipe } from '@angular/common';
+import { BenefitRestaurantItemComponent } from '../benefit-restaurant-item/benefit-restaurant-item.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-benefit-restaurant-list',
   standalone: true,
   imports: [
     RouterModule, DatePipe, CommonModule,
+  BenefitRestaurantItemComponent,NgxPaginationModule
   ],
   providers: [BenefitRestaurantService],
   templateUrl: './benefit-restaurant-list.component.html',
   styleUrl: './benefit-restaurant-list.component.css'
 })
-export class BenefitRestaurantListComponent  implements OnInit {
-  restaurants: RestauBenefitRestaurant[] = [
-    {
-      id: 1,
-      merchant_number: 232,
-      name: 'Kayser House',
-      benefit_percentage: 20.0,
-      benefit_availability_policy: 'allowed'
-    },
-  ];
+
+export class BenefitRestaurantListComponent implements OnInit {
+  loading: boolean = true;
+  p: number = 1;
+  filteredRestaurants: RestauBenefitRestaurant[] = [];
+  restaurants: RestauBenefitRestaurant[] = [];
 
   constructor(private benefitRestaurantService: BenefitRestaurantService) {}
 
   ngOnInit(): void {
-    //this.loadRestaurants();
-    this.loadRestaurantsTest();
+    this.loadRestaurants();
+    // this.loadRestaurantsTest();
   }
-  loadRestaurantsTest2() {
-    // Simulation de données pour le test
-    const testData: RestauBenefitRestaurant[] = [
-      {
-        id: 1,
-        merchant_number: 232,
-        name: 'Kayser House',
-        benefit_percentage: 20.0,
-        benefit_availability_policy: 'allowed'
-      },
-      {
-        id: 2,
-        merchant_number: 112,
-        name: 'Madiba Coffee Shop',
-        benefit_percentage: 15.0,
-        benefit_availability_policy: 'not_allowed'
-      }
-      // Ajoutez d'autres données de test au besoin
-    ];
 
-    // Affectez les données de test à la propriété restaurants
-    this.restaurants = testData;
-  }
   loadRestaurantsTest() {
     // Simulation de données pour le test
     const testData: RestauBenefitRestaurant[] = [];
@@ -72,15 +49,18 @@ export class BenefitRestaurantListComponent  implements OnInit {
 
     // Affectez les données de test à la propriété restaurants
     this.restaurants = testData;
+    this.loading = false; // Set loading to false after data is loaded
   }
 
   loadRestaurants() {
     this.benefitRestaurantService.getAllRestaurants().subscribe(
       (data) => {
         this.restaurants = data;
+        this.loading = false; // Set loading to false after data is loaded
       },
       (error) => {
         console.log(error);
+        this.loading = false; // Set loading to false in case of error
       }
     );
   }
@@ -91,8 +71,7 @@ export class BenefitRestaurantListComponent  implements OnInit {
       .subscribe(
         (data) => {
           console.log('Benefit availability updated.');
-          // Refresh the list after updating availability
-          this.loadRestaurants();
+          this.loadRestaurants(); // Refresh the list after updating availability
         },
         (error) => {
           console.log(error);

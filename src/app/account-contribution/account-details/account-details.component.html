@@ -1,1 +1,30 @@
-<p>account-details works!</p>
+<!-- account-details.component.html -->
+<div class="card mt-3">
+  <div class="card-body">
+    <h5 class="card-title">{{ account.owner }}</h5>
+    <p class="card-text">ID du Compte: {{ account.id }}</p>
+    <p class="card-text">Nom du Compte: {{ account.owner }}</p>
+    <p class="card-text">Numéro du Compte: {{ account.account_number }}</p>
+    <p class="card-text">
+      Numéro de Carte de Crédit: {{ account.credit_card_number }}
+    </p>
+    <p class="card-text">
+      Avantages Totals:
+      {{ account.total_benefits | currency : "EUR" : "symbol" : "1.2-2" }}
+    </p>
+    <app-beneficiaries-list [beneficiaries]="beneficiaries">
+    </app-beneficiaries-list>
+    <!-- Bouton pour ajouter un bénéficiaire -->
+    <button class="btn btn-primary mt-3" (click)="openAddBeneficiaryModal()">
+      Ajouter un Bénéficiaire
+    </button>
+
+    <!-- Bouton pour partager la récompense -->
+    <button class="btn btn-dark mt-3" (click)="shareReward()">
+      Partager la Récompense
+    </button>
+    <p class="alert alert-info" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <!--  -->
+  </div>
+</div>

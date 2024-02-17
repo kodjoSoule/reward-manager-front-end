@@ -1,1 +1,34 @@
-<p>add-beneficiary works!</p>
+<!-- add-beneficiary.component.html -->
+<form (ngSubmit)="addBeneficiary()" class="col-md-10 p-4">
+  <h2>Ajoutez un beneficiaire</h2>
+  <div class="form-group">
+    <label for="beneficiaryName">Nom du Bénéficiaire</label>
+    <input
+      type="text"
+      id="beneficiaryName"
+      name="beneficiaryName"
+      class="form-control mb-2"
+      [(ngModel)]="newBeneficiary.name"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <label for="allocationPercentage">Pourcentage d'Allocation</label>
+    <input
+      type="number"
+      id="allocationPercentage"
+      name="allocationPercentage"
+      class="form-control mb-2"
+      [(ngModel)]="newBeneficiary.percentage"
+      required
+    />
+  </div>
+  <button type="submit" class="btn btn-primary mb-2 me-1">
+    Ajouter Bénéficiaire
+  </button>
+
+  <!-- Bouton pour fermer la modal -->
+  <button type="button" class="btn btn-secondary mb-2" (click)="closeModal()">
+    Fermer
+  </button>
+</form>
