@@ -8,6 +8,8 @@ import { Account } from '../account';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddBeneficiaryComponent } from '../add-beneficiary/add-beneficiary.component';
 import { FormsModule } from '@angular/forms';
+import { AccountContributionEventsServiceService } from '../account-contribution-events-service.service';
+
 
 @Component({
   selector: 'app-account-details',
@@ -18,7 +20,14 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './account-details.component.css'
 })
 export class AccountDetailsComponent implements OnInit{
-  @Input() account: any; // Utilisez le type correct pour Account
+  @Input() account: Account ={
+    id: 0,
+    name: '',
+    valid: '',
+    account_number: '',
+    credit_card_number: '',
+    benefits: 0.0
+  }; // Utilisez le type correct pour Account
   //account: any = {};
 
   beneficiaries: Beneficiary[] = [];
@@ -26,9 +35,12 @@ export class AccountDetailsComponent implements OnInit{
   account_number: string = '';
   errorMessage : string = '';
 
+  isLoading: boolean = false;
+
 
   constructor(private accountService: AccountContributionService
 ,
+private eventsService : AccountContributionEventsServiceService,
 private route: ActivatedRoute,
 private modalService: NgbModal
 
@@ -42,8 +54,30 @@ private modalService: NgbModal
   });
   this.loadAccountDetails();
   this.loadBeneficiaries();
+  // Abonnez-vous à l'événement de mise à jour du bénéficiaire
+  this.eventsService.beneficiariesUpdated$.subscribe(() => {
+    console.log('Événement de mise à jour du bénéficiaire reçu.');
+  // Mettez à jour les détails du compte et les bénéficiaires si nécessaire
+  this.loadAccountDetails();
+    this.loadBeneficiaries();
+});
+  // Abonnez-vous à l'événement de mise à jour du bénéficiaire
+  this.eventsService.beneficiaryUpdated$.subscribe(() => {
+    console.log('Événement de mise à jour du bénéficiaire reçu.');
+    // Mettez à jour les détails du compte et les bénéficiaires si nécessaire
+    this.loadAccountDetails();
+    this.loadBeneficiaries();
+  });
+  // Abonnez-vous à l'événement de mise à jour du bénéficiaire
+  this.eventsService.beneficiaryAdded$.subscribe(() => {
+    console.log('Événement d\'ajout du bénéficiaire reçu.');
+    // Mettez à jour les détails du compte et les bénéficiaires si nécessaire
+    this.loadAccountDetails();
+    this.loadBeneficiaries();
+  });
+
   }
-  // Méthode appelée lorsque le bénéficiaire est ajouté avec succès
+
 
 
 
@@ -55,7 +89,8 @@ private modalService: NgbModal
 
       },
       (error) => {
-        console.log(error);
+        this.errorMessage = 'Erreur lors du chargement des détails du compte';
+
 
       }
     );
@@ -69,7 +104,7 @@ private modalService: NgbModal
 
       },
       (error) => {
-        console.log(error);
+        this.errorMessage = 'Erreur lors du chargement des bénéficiaires';
 
       }
     );
@@ -77,36 +112,60 @@ private modalService: NgbModal
   }
   openAddBeneficiaryModal() {
     const modalRef = this.modalService.open(AddBeneficiaryComponent, { centered: true });
-    // Vous pouvez passer des données au composant de la modal si nécessaire
+
     modalRef.componentInstance.account = this.account;
     modalRef.componentInstance.account_number = this.account_number;
+
+    // modalRef.result.then((result) => {
+    //   if (result === 'handlePercentageUpdated') {
+    //     this.loadBeneficiaries();
+    //   }
+    //   if (result === 'messageEvent') {
+    //     this.receiveMessage(result);
+    //   }
+    // }).catch((error) => {
+    //   // Gérer les erreurs ou les fermetures de la modal
+    // });
+
+
+
+
+
+    modalRef.componentInstance.handlePercentageUpdated.subscribe(() => {
+      this.loadAccountDetails();
+      this.loadBeneficiaries();
+
+    });
   }
 
-    shareReward() {
+
+  receiveMessage($event: string) {
+    console.log($event); // Affiche le message émis par le composant enfant
+  }
+  shareReward() {
       // Vous devez implémenter la logique pour partager la récompense ici
       // Par exemple, vous pouvez appeler la méthode shareReward du service
       // avec le numéro de carte de crédit et le montant de la récompense
       const rewardAmount = 500; // Remplacez par le montant réel de la récompense
+      console.log(this.account.credit_card_number);
       this.accountService.shareReward(this.account.credit_card_number, rewardAmount).subscribe(
         (response) => {
-          console.log('Récompense partagée avec succès', response);
+
           this.errorMessage ='Récompense partagée avec succès';
           // Actualisez les détails du compte et les bénéficiaires après le partage de la récompense
           this.loadAccountDetails();
           this.loadBeneficiaries();
         },
         (error) => {
-          console.error('Erreur lors du partage de la récompense', error);
+
           this.errorMessage ='Erreur lors du partage de la récompense'
         }
-      );
+      ).add(() => {
+        this.isLoading = false;
+      });
 
   }
-
   beneficiaryAdded() {
-    // Actualisez les détails du compte après l'ajout du bénéficiaire
-    //this.loadAccountDetails();
     this.loadBeneficiaries();
-    this.ngOnInit();
   }
 }

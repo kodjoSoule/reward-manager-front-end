@@ -1,11 +1,26 @@
 <!-- create-reward.component.html -->
 
-<div class="container mt-4">
-  <h2 class="text-primary">Créer une Nouvelle Récompense</h2>
+<div class="container mt-4 p-4">
+  <h3 class="text-primary mb-2">
+    Créer une Nouvelle Récompense
+    <button
+      type="button"
+      class="btn-close h3"
+      aria-label="Close"
+      (click)="closeModal()"
+    ></button>
+  </h3>
+
+  <!-- Afficher un indicateur de chargement pendant la création -->
+  <div *ngIf="loading" class="text-center mb-3">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Chargement...</span>
+    </div>
+  </div>
 
   <form (ngSubmit)="createReward()">
     <!-- Champ pour le montant du repas -->
-    <div class="form-group">
+    <div class="form-group mb-2">
       <label for="diningAmount">Montant du Repas</label>
       <input
         type="number"
@@ -16,10 +31,10 @@
         required
       />
     </div>
-    <div class="form-group">
+    <div class="form-group mb-2">
       <label for="creditCardNumber">creditCardNumber</label>
       <input
-        type="number"
+        type="text"
         id="creditCardNumber"
         name="credit_card_number"
         class="form-control"
@@ -29,7 +44,7 @@
     </div>
 
     <!-- Liste déroulante pour choisir le restaurant -->
-    <div class="form-group">
+    <div class="form-group mb-2">
       <label for="merchantNumber">Sélectionner un Restaurant</label>
       <select
         id="merchantNumber"
@@ -47,7 +62,7 @@
       </select>
     </div>
     <!-- Champ pour la date du repas -->
-    <div class="form-group">
+    <div class="form-group mb-2">
       <label for="diningDate">Date du Repas</label>
       <input
         type="date"
@@ -58,7 +73,19 @@
         required
       />
     </div>
-    <!-- Bouton pour soumettre le formulaire de création -->
-    <button type="submit" class="btn btn-primary">Créer Récompense</button>
+    <div class="form-group mb-2">
+      <!-- Bouton pour soumettre le formulaire de création -->
+      <button type="submit" class="btn btn-primary me-2">
+        Créer Récompense
+      </button>
+      <!-- Bouton pour fermer la modal -->
+      <button
+        type="button"
+        class="btn btn-secondary me-2"
+        (click)="closeModal()"
+      >
+        Fermer
+      </button>
+    </div>
   </form>
 </div>

@@ -28,6 +28,7 @@ export class RewardManagerService implements OnInit {
 
   createReward(newReward: any): Observable<any> {
     const url = `${this.apiUrl}/rewards`;
+    console.log(newReward);
     return this.http.post(url, newReward);
   }
 

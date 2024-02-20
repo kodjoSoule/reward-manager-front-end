@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
@@ -8,15 +8,24 @@ import { Beneficiary } from './beneficiary';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AccountContributionService {
-  private apiUrl = 'http://localhost:8400/account-contribution';
+  private apiUrl = 'http://localhost:8765/account-contribution';
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      "Access-Control-Allow-Origin": "http://localhost:4200",
+    })
+  };
 
   constructor(private http: HttpClient) {}
   createAccount(account: Account): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/accounts`, account);
+    return this.http.post<any>(`${this.apiUrl}/accounts`, account, this.httpOptions);
   }
 
   getAccounts(): Observable<Account[]> {
+    console.log(`fetching data`);
+    console.log(`${this.apiUrl}`);
     return this.http.get<Account[]>(`${this.apiUrl}/accounts`);
   }
 
@@ -33,7 +42,14 @@ export class AccountContributionService {
   }
   addBeneficiary(accountNumber: string, newBeneficiary: Beneficiary): Observable<any> {
     const url = `${this.apiUrl}/accounts/${accountNumber}/beneficiaries`;
-    return this.http.post<any>(url, newBeneficiary);
+    // const requestBody = { newBeneficiary: allocationPercentage };
+
+    return this.http.post<any>(url, newBeneficiary );
+  }
+  removeBeneficiary(accountNumber: string, beneficiaryId: number): Observable<any> {
+    const url = `${this.apiUrl}/accounts/${accountNumber}/beneficiaries/${beneficiaryId}`;
+    // const requestBody = { newBeneficiary: allocationPercentage };
+    return this.http.delete<any>(url);
   }
 
   shareReward(creditCardNumber: string, reward: number): Observable<any> {

@@ -1,41 +1,108 @@
 <!-- create-account.component.html -->
-<form (ngSubmit)="createAccount()" class="p-3">
-  <div class="form-group">
-    <label for="accountOwner">Nom du Compte</label>
-    <input
-      type="text"
-      id="name"
-      name="name"
-      class="form-control"
-      [(ngModel)]="newAccount.name"
-      required
-    />
+<div *ngIf="!accountCreated; else isSuccess ? successMessage : errorMessages">
+  <form (ngSubmit)="createAccount()" class="p-3" #accountForm="ngForm">
+    <div class="form-group">
+      <label for="accountOwner">Nom du Compte</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        class="form-control"
+        [(ngModel)]="newAccount.name"
+        required
+      />
+      <!-- Afficher un message d'erreur si le champ n'est pas valide -->
+
+      <div
+        *ngIf="
+          !accountForm.controls['name'].valid &&
+          accountForm.controls['name'].touched
+        "
+      >
+        <div class="text-danger">Le nom du compte est requis.</div>
+      </div>
+    </div>
+    <div class="form-group mb-2">
+      <label for="creditCardNumber">Numéro de Carte de Crédit</label>
+      <input
+        type="number"
+        id="creditCardNumber"
+        name="credit_card_number"
+        class="form-control"
+        [(ngModel)]="newAccount.credit_card_number"
+        minlength="8"
+        required
+      />
+      <!-- Afficher un message d'erreur si le champ n'est pas valide et a été touché -->
+      <div
+        *ngIf="
+          accountForm.controls['credit_card_number'].invalid &&
+          accountForm.controls['credit_card_number'].touched
+        "
+      >
+        <div class="text-danger">
+          Le numéro de carte de crédit doit comporter au moins 8 chiffres.
+        </div>
+      </div>
+      <!--  -->
+    </div>
+
+    <div class="form-group mb-2">
+      <label for="accountNumber">Numéro du Compte</label>
+      <input
+        type="text"
+        id="accountNumber"
+        name="account_number"
+        class="form-control"
+        [(ngModel)]="newAccount.account_number"
+        minlength="4"
+        required
+      />
+      <!-- Afficher un message d'erreur si le champ n'est pas valide et a été touché -->
+      <div
+        *ngIf="
+          accountForm.controls['account_number'].invalid &&
+          accountForm.controls['account_number'].touched
+        "
+      >
+        <div class="text-danger">Lenuméro du Compte est requis</div>
+      </div>
+      <!--  -->
+    </div>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="!accountForm.valid"
+    >
+      Créer Compte
+    </button>
+    <!-- Bouton pour fermer le formulaire -->
+    <button type="button" class="btn btn-secondary ms-2" (click)="closeModal()">
+      Fermer
+    </button>
+  </form>
+</div>
+<ng-template #successMessage class="p-3">
+  <div class="col-md-10 p-5">
+    <div class="alert alert-success mt-3">Compte créé avec succès</div>
+    <button type="button" class="btn btn-secondary ms-2" (click)="closeModal()">
+      Fermer
+    </button>
   </div>
-  <div class="form-group">
-    <label for="creditCardNumber">Numéro de Carte de Crédit</label>
-    <input
-      type="number"
-      id="creditCardNumber"
-      name="credit_card_number"
-      class="form-control"
-      [(ngModel)]="newAccount.credit_card_number"
-      required
-    />
+</ng-template>
+
+<ng-template #errorMessages class="p-3">
+  <div class="col-md-10 p-5">
+    <div class="alert alert-danger mt-3">
+      Erreur lors de la création du compte.
+    </div>
+    <button type="button" class="btn btn-secondary ms-2" (click)="closeModal()">
+      Fermer
+    </button>
   </div>
-  <div class="form-group">
-    <label for="accountNumber">Numéro de Compte</label>
-    <input
-      type="number"
-      id="accountNumber"
-      name="account_number"
-      class="form-control"
-      [(ngModel)]="newAccount.account_number"
-      required
-    />
+</ng-template>
+<ng-template #loading class="p-5">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
   </div>
-  <button type="submit" class="btn btn-primary">Créer Compte</button>
-  <!-- Bouton pour fermer le formulaire -->
-  <button type="button" class="btn btn-secondary ms-2" (click)="closeModal()">
-    Fermer
-  </button>
-</form>
+</ng-template>

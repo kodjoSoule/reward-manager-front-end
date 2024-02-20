@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AccountContributionService } from '../account-contribution.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AccountContributionEventsServiceService } from '../account-contribution-events-service.service';
 @Component({
   selector: 'app-add-beneficiary',
   standalone: true,
@@ -20,18 +21,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AddBeneficiaryComponent implements OnInit{
   @Input() account_number!: string; // Vous devez fournir le numéro de compte depuis le composant parent
 
-  @Output() beneficiaryAdded: EventEmitter<void> = new EventEmitter<void>();
-
-
   newBeneficiary: Beneficiary = {
     id: 0,
     name: '',
     percentage: 0,
+    allocation_percentage: 0,
     savings: 0
   };
 
   constructor(private activeModal: NgbActiveModal,private  beneficiaryService : AccountContributionService,
-    private _snackBar: MatSnackBar
+    private eventsService :AccountContributionEventsServiceService
     ) {}
 
 
@@ -44,7 +43,7 @@ export class AddBeneficiaryComponent implements OnInit{
         (response) => {
 
           console.log('Bénéficiaire ajouté avec succès', response);
-          this.beneficiaryAdded.emit(); // Émettre l'événement après l'ajout
+          this.eventsService.emitBeneficiaryAdded();
           this.activeModal.close();
 
         },

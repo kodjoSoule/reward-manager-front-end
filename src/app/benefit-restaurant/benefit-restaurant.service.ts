@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class BenefitRestaurantService {
-  private apiUrl = 'http://localhost:8205'; // Remplacez par l'URL réelle de votre API
+  private apiUrl = 'http://localhost:8765'; // Remplacez par l'URL réelle de votre API
 
   constructor(private http: HttpClient) {}
 
