@@ -1,0 +1,81 @@
+<!-- benefit-restaurant-list.component.html -->
+
+<h2>Liste des Restaurants</h2>
+
+<!-- Bouton pour afficher la modal d'ajout de restaurant -->
+<button class="btn btn-success" (click)="openAddRestaurantModal()">
+  Ajouter un Restaurant
+</button>
+
+<!-- Modal d'ajout de restaurant -->
+<div
+  class="modal fade"
+  id="addRestaurantModal"
+  tabindex="-1"
+  aria-labelledby="addRestaurantModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addRestaurantModalLabel">
+          Ajouter un Restaurant
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- Ajouter ici le formulaire d'ajout de restaurant -->
+        <!-- Vous pouvez utiliser [(ngModel)] pour lier les valeurs du formulaire à votre modèle -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Fermer
+        </button>
+        <button type="button" class="btn btn-primary" (click)="addRestaurant()">
+          Ajouter
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Numéro du marchand</th>
+      <th>Nom</th>
+      <th>Pourcentage d'avantage</th>
+      <th>Politique de disponibilité</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let restaurant of restaurants">
+      <td>{{ restaurant.merchant_number }}</td>
+      <td>{{ restaurant.name }}</td>
+      <td>{{ restaurant.benefit_percentage }}</td>
+      <td>{{ restaurant.benefit_availability_policy }}</td>
+      <td>
+        <button
+          class="btn btn-primary"
+          (click)="updateAvailability(restaurant.merchant_number, 'allowed')"
+        >
+          Activer
+        </button>
+        <button
+          class="btn btn-danger"
+          (click)="
+            updateAvailability(restaurant.merchant_number, 'not_allowed')
+          "
+        >
+          Suspendre
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

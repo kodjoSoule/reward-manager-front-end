@@ -1,0 +1,47 @@
+<div class="row p-4">
+  <!-- Affichage du spinner pendant le chargement -->
+  <div *ngIf="loading" class="col-md-12 mt-5 mb-5 text-center">
+    <button class="btn btn-primary" type="button" disabled>
+      <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+      <span role="status"> Loading...</span>
+    </button>
+  </div>
+</div>
+
+<div class="row" *ngIf="!loading && restaurants.length > 0; else noRestaurants">
+  <div
+    *ngFor="
+      let restaurant of restaurants
+        | paginate : { itemsPerPage: 16, currentPage: p }
+    "
+    class="col-md-3 mb-4"
+  >
+    <app-benefit-restaurant-item
+      [restaurant]="restaurant"
+    ></app-benefit-restaurant-item>
+  </div>
+</div>
+
+<!-- Aucun produit disponible -->
+<ng-template #noRestaurants>
+  <div class="col-md-12 text-center">
+    <p>Aucun produit disponible pour le moment.</p>
+    <div class="row p-4">
+      <!-- Affichage du spinner pendant le chargement -->
+      <div  class="col-md-12 mt-5 mb-5 text-center">
+        <div class="spinner"></div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Affichage de la pagination si la liste de produits n'est pas vide -->
+<div *ngIf="!loading && restaurants.length > 0" class="row">
+  <div class="col-8 mx-auto text-center">
+    <pagination-controls
+      (pageChange)="p = $event"
+      previousLabel="Précédent"
+      nextLabel="Suivant"
+    ></pagination-controls>
+  </div>
+</div>

@@ -54,9 +54,6 @@
             >Contributions aux comptes</a
           >
         </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link btn btn-light" routerLink="/about">À propos</a>
-        </li>
 
         <!-- //<li class="nav-item" *ngIf="!isAuthenticated()"> -->
         <li class="nav-item" routerLinkActive="active">
@@ -64,10 +61,12 @@
             >Administration</a
           >
         </li>
-
-        <li class="nav-item" *ngIf="!isAuthenticated()">
-          <a class="nav-link btn btn-light" routerLink="/login">Se Connecter</a>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link btn btn-light" routerLink="/about">À propos</a>
         </li>
+        <!-- <li class="nav-item" *ngIf="!isAuthenticated()">
+          <a class="nav-link btn btn-light" routerLink="/login">Se Connecter</a>
+        </li> -->
 
         <li class="nav-item" *ngIf="isAuthenticated()">
           <a class="nav-link btn btn-light" (click)="logout()"

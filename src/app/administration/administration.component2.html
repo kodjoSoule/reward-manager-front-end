@@ -1,0 +1,74 @@
+<!-- administration.component.html -->
+<div class="container mt-4">
+  <h2 class="text-dark">Espace Administration</h2>
+  <p class="text-muted">
+    Bienvenue dans l'espace d'administration de notre programme "Plan Épargne
+  </p>
+
+  <!-- Section Gestion des Restaurants -->
+  <div class="mt-4">
+    <h3 class="text-dark">Gestion des Restaurants</h3>
+    <ul class="list-group">
+      <li class="list-group-item bg-dark">
+        <a routerLink="/benefit-restaurant/admin/list" class="text-light btn"
+          >Liste des Restaurants</a
+        >
+      </li>
+      <li class="list-group-item bg-dark">
+        <!-- <a routerLink="/update-restaurant-availability" class="text-light btn" -->
+        <a routerLink="/benefit-restaurant/admin/list" class="text-light btn"
+          >Gérer la Disponibilité des Restaurants</a
+        >
+      </li>
+    </ul>
+  </div>
+
+  <!-- Section Gestion des Comptes -->
+  <div class="mt-4">
+    <h3 class="text-dark">Gestion des Comptes</h3>
+    <ul class="list-group">
+      <li class="list-group-item bg-dark">
+        <a routerLink="/account-contribution" class="text-light btn"
+          >Listes des Comptes</a
+        >
+      </li>
+      <li class="list-group-item bg-dark">
+        <a routerLink="/create-account" class="text-light btn"
+          >Créer un Compte</a
+        >
+      </li>
+      <!-- <li class="list-group-item bg-dark">
+        <a routerLink="/add-beneficiary" class="text-light btn"
+          >Ajouter un Bénéficiaire à un Compte</a
+        >
+      </li> -->
+      <li class="list-group-item bg-dark">
+        <a routerLink="/account-details" class="text-light btn"
+          >Consulter les Détails d'un Compte</a
+        >
+      </li>
+    </ul>
+  </div>
+
+  <!-- Section Gestion des Récompenses -->
+  <div class="mt-4">
+    <h3 class="text-dark">Gestion des Récompenses</h3>
+    <ul class="list-group">
+      <li class="list-group-item bg-dark">
+        <a routerLink="/reward-manager" class="text-light btn"
+          >Liste dees Récompense</a
+        >
+      </li>
+      <li class="list-group-item bg-dark">
+        <a routerLink="/create-reward" class="text-light btn"
+          >Créer une Récompense</a
+        >
+      </li>
+      <li class="list-group-item bg-dark">
+        <a routerLink="/reward-info" class="text-light btn"
+          >Consulter les Informations sur une Récompense</a
+        >
+      </li>
+    </ul>
+  </div>
+</div>

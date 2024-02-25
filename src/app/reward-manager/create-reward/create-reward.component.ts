@@ -1,3 +1,4 @@
+
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RewardManagerService } from '../reward-manager.service';
@@ -12,10 +13,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ResponseModalComponent } from './response-modal.component';
 import { RewardRequest } from '../reward-request';
+import { RewardManagerEventsServiceService } from '../reward-manager-events-service.service';
+import { RewardStorageService } from '../reward-storage.service';
 @Component({
   selector: 'app-create-reward',
   standalone: true,
-  providers : [RewardManagerService],
+  providers : [RewardManagerService,
+    RewardStorageService],
   imports: [
     CommonModule, FormsModule,FontAwesomeModule,
     RouterModule, RouterLink
@@ -30,18 +34,20 @@ export class CreateRewardComponent {
   errorMeesage : string= '';
   newReward: RewardRequest = {
     // s
-    id: 179,
-    credit_card_number: 'CC00120231221',
+    id: 171,
+    credit_card_number: '',
     merchant_number: 112,
     dining_amount: 2300,
-    dining_date: this.getCurrentDate(),
+    dining_date: '2022-12-21T13:56:00Z',
   };
 
   restaurants: any[] = []; // Assurez-vous que le type correspond à la structure de vos données de restaurant
   constructor(
     private rewardManagerService: RewardManagerService,
+    private rewardManagerEventsService : RewardManagerEventsServiceService,
     private benefitRestaurantService: BenefitRestaurantService,
     private router : Router,
+    private rewardStorageService: RewardStorageService,
     private activeModal :NgbActiveModal,
     private modalService : NgbModal
 
@@ -78,19 +84,25 @@ export class CreateRewardComponent {
     this.loading = true;
     console.log(this.newReward);
     this.rewardManagerService.createReward(this.newReward).subscribe(
-
       (response: RewardConfirmation) => {
         console.log('Récompense créée avec succès:', response);
         this.errorMeesage = 'Récompense créée avec succès';
         // Désactivez le chargement après la création réussie
         this.loading = false;
+        // Émettre l'événement de création de récompense
+        this.rewardManagerEventsService.emitRewardCreated();
+
+
+         // Ajoutez la récompense à la liste des récompenses stockées
+        this.rewardStorageService.addReward({
+          reward_confirmation_number: response.reward_confirmation_number,
+          credit_card_number: this.newReward.credit_card_number,
+        });
 
         // Affichez le message de réponse sur le même modal
         this.showResponseModal(this.errorMeesage);
-
         // Fermer la modal après la création réussie
         this.activeModal.close();
-
         // Rechargez la liste des récompenses après la création
         // Vous pouvez également émettre un événement pour informer le composant parent de la création réussie.
       },

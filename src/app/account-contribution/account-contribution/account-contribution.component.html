@@ -1,0 +1,46 @@
+<!-- account-contribution.component.html -->
+<!--  -->
+<div class="row">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item" routerLinkActive="active">
+        <a class="nav-link btn btn-light" routerLink="/home">
+          <i class="fa fa-home"></i>
+          Accueil
+        </a>
+      </li>
+
+      <li class="breadcrumb-item" routerLinkActive="active">
+        <a class="nav-link btn btn-light" routerLink="/account-contribution">
+          <i class="fa fa-cogs"></i>
+          Gestion des contributions
+        </a>
+      </li>
+
+      <li class="breadcrumb-item active" aria-current="page">
+        <i class="fa fa-list"></i>
+        Liste des comptes
+      </li>
+    </ol>
+  </nav>
+</div>
+<!--  -->
+<hr />
+<div class="container mt-4">
+  <h2 class="text-primary">Gestion des Contributions</h2>
+  <p>
+    Bienvenue dans la section de gestion des contributions de notre programme
+    "Plan Épargne Restaurant"
+  </p>
+
+  <!-- Bouton pour ouvrir la modal d'ajout de compte -->
+  <!-- <button type="button" class="btn btn-primary" (click)="openAddAccountModal()">
+    Ajouter un Compte
+  </button> -->
+
+  <!-- Formulaire de création de compte dans la modal -->
+  <!-- <app-create-account></app-create-account> -->
+
+  <!-- Liste des comptes existants -->
+  <app-account-contribution-list></app-account-contribution-list>
+</div>

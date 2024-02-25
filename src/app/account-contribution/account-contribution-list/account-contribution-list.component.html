@@ -1,0 +1,29 @@
+<ngx-ui-loader></ngx-ui-loader>
+<!-- account-list.component.html -->
+<h3 class="mt-4">Listes des Comptes</h3>
+<!-- Bouton pour ouvrir la modal d'ajout de compte -->
+<button class="btn btn-success mb-2" (click)="openAddAccountModal()">
+  Ajouter un Compte
+</button>
+<hr />
+
+<div class="row p-4">
+  <!-- Affichage du spinner pendant le chargement -->
+  <div *ngIf="loading" class="col-md-12 mt-5 mb-5 text-center">
+    <button class="btn btn-primary" type="button" disabled>
+      <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+      <span role="status"> Loading...</span>
+    </button>
+  </div>
+</div>
+
+<div class="row" *ngIf="accounts && accounts.length > 0">
+  <div class="col-md-4" *ngFor="let account of accounts">
+    <div>
+      <!-- <app-account-details [account]="account"></app-account-details> -->
+      <app-account-contribution-item
+        [account]="account"
+      ></app-account-contribution-item>
+    </div>
+  </div>
+</div>

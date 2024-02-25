@@ -1,3 +1,5 @@
+@import '../node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css';
+
 /* Add this to your global or component-specific CSS */
 .navbar-nav .nav-item.active a {
     /* background-color: #007bff; */
@@ -9,3 +11,7 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+

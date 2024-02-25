@@ -1,0 +1,19 @@
+<!-- account-details.component.html -->
+<div class="card mt-3">
+  <div class="card-body">
+    <h5 class="card-title">{{ account.name }}</h5>
+    <!-- <p class="card-text">ID du Compte: {{ account.id }}</p> -->
+    <p class="card-text">Nom du Compte: {{ account.name }}</p>
+    <p class="card-text">Numero du Compte: {{ account.account_number }}</p>
+    <!-- <p class="card-text">Numéro du Compte: {{ account.account_number }}</p> -->
+
+    <p class="card-text">
+      Avantages Totals :
+      {{ account.benefits | currency : " XOF" : "symbol" : "1.2-2" }}
+    </p>
+    <!-- Bouton pour partager la récompense -->
+    <button class="btn btn-dark mt-3" (click)="DetailsAccount()">
+      Details
+    </button>
+  </div>
+</div>

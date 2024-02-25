@@ -1,0 +1,101 @@
+ng add @fortawesome/angular-fontawesome
+
+BeneficiaryUpdateService
+
+ng generate service auth
+Créez un gardien de routeng generate guard auth
+   ng add @angular/material
+
+ng generate component component/modal-info
+
+ng generate component component/info-modal
+ng generate component component/error-modal
+ng generate component benefit-restaurant/view-taux-restaurant
+
+ng generate guard auth
+
+ng generate component component/not-found
+ng generate component component/about
+
+###Benefit Restaurant Service:
+BenefitRestaurantListComponent:
+    ng generate component benefit-restaurant/benefit-restaurant-list
+adminlist :
+    ng generate component benefit-restaurant/admin/admin-benefit-restaurant-list
+AddRestaurantComponent:
+    ng generate component benefit-restaurant/add-restaurant
+UpdateRestaurantAvailabilityComponent:
+    ng generate component benefit-restaurant/update-restaurant-availability
+benefit-restaurant.service.ts
+    ng generate service benefit-restaurant/benefit-restaurant
+Model interface
+    ng generate class benefit-restaurant/restaurant
+
+###Benefit Calculation Service:
+BenefitCalculationComponent:
+    ng generate component benefit-calculation/benefit-calculation
+Benefit calculation service
+    ng generate service benefit-calculation/benefit-calculation
+
+###Reward Manager Service:
+RewardInfoComponent:
+    ng generate component reward-manager/reward-info
+CreateRewardComponent:
+    ng generate component reward-manager/create-reward
+
+ng generate component reward-manager/reward-item
+Model reward
+ng generate class reward-manager/Reward
+ng generate class reward-manager/RewardConfirmation
+
+ng generate class reward-manager/RewardManagerEventsService
+
+###Account Contribution Service:
+    ng generate component account-contribution/account-contribution
+CreateAccountComponent:
+
+    ng generate component account-contribution/create-account
+AddBeneficiaryComponent:
+    ng generate component account-contribution/add-beneficiary
+AccountDetailsComponent:
+    ng generate component account-contribution/account-details
+BeneficiariesListComponent:
+    ng generate component account-contribution/beneficiaries-list
+UpdateBeneficiaryComponent:
+    ng generate component account-contribution/update-beneficiary
+model
+    ng generate class account-contribution/account
+    ng generate class account-contribution/Beneficiary
+    -contribution.model.ts
+###############
+ng generate service account-contribution/BeneficiaryUpdateService
+ng generate service account-contribution/AccountAddeedService
+ng generate service account-contribution/AccountContributionEventsService
+
+BeneficiaryUpdateService
+Server
+ng generate service benefit-calculation/benefit-calculation
+
+
+
+
+
+Shared (si nécessaire):
+Create un répertoire shared dans src/app:
+mkdir src/app/shared
+Create un répertoire models dans src/app/shared:
+mkdir src/app/shared/models
+Create un répertoire services dans src/app/shared:
+mkdir src/app/shared/services
+
+######################
+Font Awesome
+npm install @fortawesome/fontawesome-svg-core
+npm install @fortawesome/free-solid-svg-icons
+npm install @fortawesome/angular-fontawesome
+
+
+ npm install --save ngx-ui-loader
+
+
+https://ngx-ui-loader.stackblitz.io/

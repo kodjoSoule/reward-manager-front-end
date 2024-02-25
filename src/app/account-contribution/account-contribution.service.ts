@@ -52,7 +52,7 @@ export class AccountContributionService {
     return this.http.delete<any>(url);
   }
 
-  shareReward(creditCardNumber: string, reward: number): Observable<any> {
+  shareReward(creditCardNumber: string, reward: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${creditCardNumber}/reward/${reward}`, {});
   }
 

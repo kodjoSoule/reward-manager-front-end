@@ -1,0 +1,16 @@
+<div class="card mt-3">
+  <div class="card-body">
+    <h5 class="card-title">
+      Récompense N° {{ reward.reward_confirmation_number }}
+    </h5>
+    <p class="card-text">
+      Montant :
+      {{ reward.dining_amount }} FCFA
+    </p>
+    <p class="card-text">Marchand: {{ reward.merchant_number }}</p>
+    <p class="card-text">
+      Date de la récompense: {{ reward.dining_date | date : "medium" }}
+    </p>
+    <!-- Ajoutez d'autres détails si nécessaire -->
+  </div>
+</div>

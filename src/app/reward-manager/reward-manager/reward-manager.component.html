@@ -1,0 +1,36 @@
+<!-- reward-manager.component.html -->
+
+<ngx-ui-loader></ngx-ui-loader>
+
+<div class="container mt-4">
+  <!-- Section pour la liste des récompenses existantes -->
+  <h2 class="text-light bg-dark">Gestion des Récompenses</h2>
+
+  <!-- Liste des récompenses existantes -->
+  <!-- <div></div> *ngIf="rewards && rewards.length > 0"> -->
+  <div>
+    <h4 class="mt-4 text-secondary">
+      Récompenses Existantes
+      <!-- Bouton pour afficher la modal d'ajout de restaurant -->
+      <button class="btn btn-success" (click)="openCreateRewardModal()">
+        Creer une recompense
+      </button>
+    </h4>
+    <hr />
+    <ul>
+      <li *ngFor="let reward of rewards">
+        <!-- Utilisation du composant reward-item pour afficher chaque récompense -->
+        <app-reward-item [reward]="reward"></app-reward-item>
+        <!-- Lien vers les détails de la récompense
+        <a
+          Recompense
+          Numero
+          class="text-primary"
+          [routerLink]="['/reward-info', reward_confirmation_number]"
+        >
+          {{ reward.reward_confirmation_number }}
+        </a> -->
+      </li>
+    </ul>
+  </div>
+</div>

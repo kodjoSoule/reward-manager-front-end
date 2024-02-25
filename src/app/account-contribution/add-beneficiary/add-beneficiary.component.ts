@@ -41,11 +41,9 @@ export class AddBeneficiaryComponent implements OnInit{
       //Ajouter le bénéficiaire (remplacez cette logique par votre appel API ou votre service)
       this.beneficiaryService.addBeneficiary (this.account_number, this.newBeneficiary).subscribe(
         (response) => {
-
           console.log('Bénéficiaire ajouté avec succès', response);
           this.eventsService.emitBeneficiaryAdded();
           this.activeModal.close();
-
         },
         (error) => {
 

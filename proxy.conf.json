@@ -1,0 +1,17 @@
+{
+  "/benefit-restaurant/*": {
+    "target": "http://localhost:8765"
+  },
+  "/benefit-calculation/*": {
+    "target": "http://localhost:8765"
+  },
+  "/account-contribution/*": {
+    "target": "http://localhost:8765"
+  },
+  "/reward-manager/*": {
+    "target": "http://localhost:8765"
+  },
+  "/benefitserver/*": {
+    "target": "http://localhost:8765"
+  }
+}

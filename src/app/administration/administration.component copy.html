@@ -1,0 +1,64 @@
+<!-- administration.component.html -->
+<div class="container mt-4">
+  <h2 class="text-dark">Espace Administration</h2>
+  <p class="text-muted">
+    Bienvenue dans l'espace d'administration de notre programme "Plan Épargne
+    Restaurant". En tant qu'administrateur, vous avez accès à des
+    fonctionnalités avancées pour gérer les restaurants, les comptes et les
+    récompenses.
+  </p>
+
+  <!-- Section Gestion des Restaurants -->
+  <div class="mt-4">
+    <h3 class="text-dark">Gestion des Restaurants</h3>
+    <ul class="list-group">
+      <li class="list-group-item bg-dark">
+        <a routerLink="/add-restaurant" class="text-light"
+          >Ajouter un Restaurant</a
+        >
+      </li>
+      <li class="list-group-item bg-dark">
+        <a routerLink="/update-restaurant-availability" class="text-light"
+          >Gérer la Disponibilité des Restaurants</a
+        >
+      </li>
+    </ul>
+  </div>
+
+  <!-- Section Gestion des Comptes -->
+  <div class="mt-4">
+    <h3 class="text-dark">Gestion des Comptes</h3>
+    <ul class="list-group">
+      <li class="list-group-item bg-dark">
+        <a routerLink="/create-account" class="text-light">Créer un Compte</a>
+      </li>
+      <li class="list-group-item bg-dark">
+        <a routerLink="/add-beneficiary" class="text-light"
+          >Ajouter un Bénéficiaire à un Compte</a
+        >
+      </li>
+      <li class="list-group-item bg-dark">
+        <a routerLink="/account-details" class="text-light"
+          >Consulter les Détails d'un Compte</a
+        >
+      </li>
+    </ul>
+  </div>
+
+  <!-- Section Gestion des Récompenses -->
+  <div class="mt-4">
+    <h3 class="text-dark">Gestion des Récompenses</h3>
+    <ul class="list-group">
+      <li class="list-group-item bg-dark">
+        <a routerLink="/create-reward" class="text-light"
+          >Créer une Récompense</a
+        >
+      </li>
+      <li class="list-group-item bg-dark">
+        <a routerLink="/reward-info" class="text-light"
+          >Consulter les Informations sur une Récompense</a
+        >
+      </li>
+    </ul>
+  </div>
+</div>

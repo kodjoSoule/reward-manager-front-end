@@ -1,7 +1,7 @@
 .error-message {
-  border: 1px solid #dc3545;
+  border: 1px solid #120507;
   background-color: #f8d7da;
-  color: #721c24;
+  color: #7b00ff;
   padding: 10px;
   margin-bottom: 15px;
   border-radius: 5px;
@@ -12,5 +12,5 @@
 .error-icon {
   font-size: 20px;
   margin-right: 10px;
-  color: #721c24;
+  color: #09feb0;
 }

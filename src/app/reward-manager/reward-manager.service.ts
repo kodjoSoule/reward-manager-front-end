@@ -9,7 +9,7 @@ import { Reward } from './reward';
   providedIn: 'root'
 })
 export class RewardManagerService implements OnInit {
-  private apiUrl = 'http://localhost:8300/reward-manager'; // Remplacez par l'URL de votre API
+  private apiUrl = 'http://localhost:8765/reward-manager'; // Remplacez par l'URL de votre API
 
   constructor(private http: HttpClient) {}
   ngOnInit(): void {

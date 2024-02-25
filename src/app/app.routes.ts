@@ -27,6 +27,7 @@ export const routes: Routes = [
  // Ajoutez cette ligne pour le LoginComponent
 
   { path: 'benefit-restaurant-list',title: 'Listes des produits',  component: BenefitRestaurantListComponent },
+  // { path: 'benefit-restaurant-list', title: 'Listes des produits', loadChildren: () =>AdminBenefitRestaurantListComponent },
   { path: 'add-restaurant', component: AddRestaurantComponent },
   { path: 'update-restaurant-availability', component: UpdateRestaurantAvailabilityComponent },
   { path: 'reward-manager',title: 'Gestion des recompenses', component: RewardManagerComponent },
@@ -39,6 +40,9 @@ export const routes: Routes = [
   { path: 'account-contribution/accounts/:account_number', component: AccountDetailsComponent },
   { path: 'beneficiaries-list', component: BeneficiariesListComponent },
   { path: 'update-beneficiary', component: UpdateBeneficiaryComponent },
+
+  // { path: 'benefit-restaurant-list', title: 'Listes des produits', loadChildren: () =>AdminBenefitRestaurantListComponent },
+  // { path: 'benefit-restaurant/admin/list', loadChil },
   { path: 'benefit-restaurant/admin/list', component: AdminBenefitRestaurantListComponent },
   { path: '', redirectTo: '/benefit-restaurant-list', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent }
