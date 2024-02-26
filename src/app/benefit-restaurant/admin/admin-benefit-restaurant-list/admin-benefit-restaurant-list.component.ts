@@ -17,10 +17,9 @@ import { NgxUiLoaderModule, NgxUiLoaderService } from 'ngx-ui-loader';
   standalone: true,
   providers : [BenefitRestaurantService,NgxUiLoaderService,
     NgxUiLoaderModule],
-  imports: [CommonModule,RouterModule, FormsModule,
+  imports: [
+    CommonModule,RouterModule, FormsModule,
     NgxUiLoaderModule,NgxUiLoaderModule,
-     CommonModule,
-
   ],
   templateUrl: './admin-benefit-restaurant-list.component.html',
   styleUrl: './admin-benefit-restaurant-list.component.css'
