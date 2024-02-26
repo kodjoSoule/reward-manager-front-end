@@ -1,0 +1,54 @@
+<!-- share-reward.component.html -->
+<div class="modal-header">
+  <h4 class="modal-title">Sélectionner une Récompense</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="closeModal()"
+  ></button>
+</div>
+
+<div class="modal-body">
+  <form (ngSubmit)="selectReward()" #rewardForm="ngForm">
+    <div class="form-group mb-3">
+      <label for="selectedReward">Sélectionner une Récompense :</label>
+      <select
+        id="selectedReward"
+        name="selectedReward"
+        class="form-control"
+        [(ngModel)]="selectedReward"
+        required
+      >
+        <!-- Option par défaut -->
+        <option value="" disabled selected>Sélectionnez une récompense</option>
+
+        <!-- Options pour les récompenses -->
+        <option
+          *ngFor="let reward of rewards"
+          [value]="reward.reward_confirmation_number"
+        >
+          Reward - {{ reward.reward_confirmation_number }} -{{
+            reward.reward_amount
+          }}
+        </option>
+      </select>
+    </div>
+    <div
+      class="text-danger mb-3"
+      *ngIf="
+        rewardForm.controls['selectedReward'].invalid &&
+        rewardForm.controls['selectedReward'].touched
+      "
+    >
+      La sélection d'une récompense est requise.
+    </div>
+    <button type="submit" class="btn btn-primary">Sélectionner</button>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="closeModal()">
+    Fermer
+  </button>
+</div>

@@ -10,18 +10,23 @@ import { AddRestaurantComponent } from '../../add-restaurant/add-restaurant.comp
 import { ErrorModalComponent } from '../../../component/error-modal/error-modal.component';
 import { InfoModalComponent } from '../../../component/info-modal/info-modal.component';
 import { ViewTauxRestaurantComponent } from '../../view-taux-restaurant/view-taux-restaurant.component';
+import { NgxUiLoaderModule, NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-admin-benefit-restaurant-list',
   standalone: true,
-  providers : [BenefitRestaurantService],
-  imports: [CommonModule,RouterModule, FormsModule],
+  providers : [BenefitRestaurantService,NgxUiLoaderService,
+    NgxUiLoaderModule],
+  imports: [CommonModule,RouterModule, FormsModule,
+    NgxUiLoaderModule,NgxUiLoaderModule,
+     CommonModule,
+
+  ],
   templateUrl: './admin-benefit-restaurant-list.component.html',
   styleUrl: './admin-benefit-restaurant-list.component.css'
 })
-export class AdminBenefitRestaurantListComponent {
+export class AdminBenefitRestaurantListComponent implements OnInit{
   restaurants: RestauBenefitRestaurant[] = [];
-
    // Méthode pour ouvrir la modal d'ajout de restaurant
    openAddRestaurantModal() {
     const modalRef = this.modalService.open(AddRestaurantComponent, { centered: true });
@@ -43,9 +48,13 @@ export class AdminBenefitRestaurantListComponent {
   handleRestaurantAdded() {
     this.loadRestaurants(); // Actualiser la liste des restaurants après l'ajout
   }
-  constructor(private benefitRestaurantService: BenefitRestaurantService,private modalService: NgbModal) {}
+  constructor(private benefitRestaurantService: BenefitRestaurantService,private modalService: NgbModal,
+    private ngxLoader : NgxUiLoaderService,
+    private router: Router
+    ) {}
 
   ngOnInit(): void {
+    this.ngxLoader.start();
     this.loadRestaurants();
     // this.loadRestaurants();
 
@@ -59,6 +68,10 @@ export class AdminBenefitRestaurantListComponent {
       },
       (error) => {
         console.log(error);
+      }
+      ,
+      ()=>{
+        this.ngxLoader.stop();
       }
     );
   }
@@ -74,6 +87,9 @@ export class AdminBenefitRestaurantListComponent {
         },
         (error) => {
           console.log(error);
+        },
+        ()=>{
+          this.ngxLoader.stop();
         }
       );
   }

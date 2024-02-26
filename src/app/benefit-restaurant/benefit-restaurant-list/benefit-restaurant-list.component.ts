@@ -5,13 +5,14 @@ import { RouterModule } from '@angular/router';
 import { CommonModule, DatePipe } from '@angular/common';
 import { BenefitRestaurantItemComponent } from '../benefit-restaurant-item/benefit-restaurant-item.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxUiLoaderModule, NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-benefit-restaurant-list',
   standalone: true,
   imports: [
     RouterModule, DatePipe, CommonModule,
-  BenefitRestaurantItemComponent,NgxPaginationModule
+  BenefitRestaurantItemComponent,NgxPaginationModule,NgxUiLoaderModule
   ],
   providers: [BenefitRestaurantService],
   templateUrl: './benefit-restaurant-list.component.html',
@@ -24,9 +25,14 @@ export class BenefitRestaurantListComponent implements OnInit {
   filteredRestaurants: RestauBenefitRestaurant[] = [];
   restaurants: RestauBenefitRestaurant[] = [];
 
-  constructor(private benefitRestaurantService: BenefitRestaurantService) {}
+  errorMessage: string = '';
+
+  constructor(private benefitRestaurantService: BenefitRestaurantService,
+    private ngxLoader : NgxUiLoaderService
+    ) {}
 
   ngOnInit(): void {
+    this.ngxLoader.start();
     this.loadRestaurants();
     // this.loadRestaurantsTest();
   }
@@ -57,10 +63,15 @@ export class BenefitRestaurantListComponent implements OnInit {
       (data) => {
         this.restaurants = data;
         this.loading = false; // Set loading to false after data is loaded
+
       },
       (error) => {
         console.log(error);
+        this.errorMessage = 'Error loading restaurants: ' + error.error;
         this.loading = false; // Set loading to false in case of error
+      },
+      ()=>{
+        this.ngxLoader.stop();
       }
     );
   }
@@ -75,6 +86,9 @@ export class BenefitRestaurantListComponent implements OnInit {
         },
         (error) => {
           console.log(error);
+        },
+        ()=>{
+          this.ngxLoader.stop();
         }
       );
   }

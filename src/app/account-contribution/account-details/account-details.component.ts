@@ -13,6 +13,10 @@ import { FormsModule } from '@angular/forms';
 import { AccountContributionEventsServiceService } from '../account-contribution-events-service.service';
 import { BenefitCalculationService } from '../../benefit-calculation/benefit-calculation.service';
 //import { RewardStorageService } from '../../reward-manager/reward-storage.service';
+import { Reward } from '../../reward-manager/reward';
+import { ShareRewardComponent } from '../share-reward/share-reward.component';
+
+
 
 
 @Component({
@@ -39,8 +43,8 @@ export class AccountDetailsComponent implements OnInit{
   beneficiaries: Beneficiary[] = [];
 
   account_number: string = '';
-  private storedReward! : StoredReward;
   errorMessage : string = '';
+  successMessage : string = '';
 
   isLoading: boolean = false;
 
@@ -85,7 +89,26 @@ private modalService: NgbModal
     this.loadAccountDetails();
     this.loadBeneficiaries();
   });
+  // Abonnez-vous à l'événement de partage de récompense
+  this.eventsService.rewardShared$.subscribe(
+    (selectedReward: any) => {
+    // Utilisez la valeur de la récompense sélectionnée
+    // this.storedReward = selectedReward;
+    console.log('Récompense sélectionnée:', selectedReward);
+    //
+//     Account_number: "ANØØI "
+// Credt_card_number: "ccøø12ø231221"
+// Reward_confirmation number :
+//     //
+    this.ShareRewardByRewardConfirmationNumberCreditCardNumber(selectedReward.Reward_confirmation_number , selectedReward.Credt_card_number);
 
+    // Chargez les détails du compte et les bénéficiaires
+    this.loadAccountDetails();
+    this.loadBeneficiaries();
+  },
+  (error) => {
+    console.error('Error loading rewards:', error);
+  });
   }
 
 
@@ -120,6 +143,28 @@ private modalService: NgbModal
     );
 
   }
+ShareRewardByRewardConfirmationNumberCreditCardNumber(rewardConfirmationNumber: string, creditCardNumber: string){
+console.log("Recompense : "+rewardConfirmationNumber);
+console.log("creditCardNumber : "+
+  creditCardNumber);
+  this.accountService.shareReward(creditCardNumber, rewardConfirmationNumber).subscribe(
+    (response) => {
+      this.successMessage ='Récompense partagée avec succès';
+      // Actualisez les détails du compte et les bénéficiaires après le partage de la récompense
+      this.loadAccountDetails();
+      this.loadBeneficiaries();
+    },
+    (error) => {
+      console.log(error);
+      this.errorMessage ='Erreur lors du partage de la récompense \n'+error.error.message;
+
+    }
+  ).add(() => {
+    this.isLoading = false;
+  });
+
+}
+
   openAddBeneficiaryModal() {
     const modalRef = this.modalService.open(AddBeneficiaryComponent, { centered: true });
 
@@ -174,7 +219,7 @@ private modalService: NgbModal
       this.accountService.shareReward("1234-5678-9012-20099", rewardNumber).subscribe(
         (response) => {
 
-          this.errorMessage ='Récompense partagée avec succès';
+          this.successMessage ='Récompense partagée avec succès';
           // Actualisez les détails du compte et les bénéficiaires après le partage de la récompense
           this.loadAccountDetails();
           this.loadBeneficiaries();
@@ -188,6 +233,30 @@ private modalService: NgbModal
       });
 
   }
+
+  openShareRewardModal(){
+ // Ouvrir le modal ShareRewardComponent
+ const modalRef = this.modalService.open(ShareRewardComponent, { centered: true });
+
+ // Passez les données nécessaires au composant ShareRewardComponent
+ modalRef.componentInstance.accountId = this.account.id;
+  modalRef.componentInstance.account_number = this.account.account_number;
+
+ modalRef.result.then(
+   (selectedReward) => {
+     // Traitez la récompense sélectionnée ici
+     console.log('Récompense sélectionnée:', selectedReward);
+
+     // Actualisez les détails du compte et les bénéficiaires après le partage de la récompense
+     this.loadAccountDetails();
+     // Vous pouvez également actualiser la liste des bénéficiaires ici si nécessaire
+   },
+   (dismissReason) => {
+     // Le modal a été fermé sans sélectionner de récompense
+     console.log('Modal fermé sans sélection de récompense:', dismissReason);
+   }
+ );
+}
   beneficiaryAdded() {
     this.loadBeneficiaries();
   }

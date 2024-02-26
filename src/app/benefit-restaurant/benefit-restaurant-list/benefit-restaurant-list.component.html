@@ -1,11 +1,5 @@
 <!-- benefit-restaurant-list.component.html -->
-<div class="row p-4">
-  <!-- Affichage du spinner pendant le chargement -->
-  <div *ngIf="loading" class="col-md-12 mt-5 mb-5 text-center">
-    <div class="spinner"></div>
-  </div>
-</div>
-
+<ngx-ui-loader> Loading </ngx-ui-loader>
 <!-- | paginate : { itemsPerPage: 16, currentPage: p } -->
 <div class="row" *ngIf="!loading && restaurants.length > 0; else noRestaurants">
   <h1>Liste des Restaurants</h1>
@@ -25,8 +19,9 @@
 <ng-template #noRestaurants>
   <div class="col-md-12 text-center">
     <p>
-      Aucun restaurant n'est actuellement disponible. Nous vous invitons à
-      réessayer ultérieurement.
+      <!-- Aucun restaurant n'est actuellement disponible. Nous vous invitons à
+      réessayer ultérieurement. -->
+      {{ errorMessage }}
     </p>
   </div>
 </ng-template>

@@ -52,9 +52,16 @@ export class AccountContributionService {
     return this.http.delete<any>(url);
   }
 
-  shareReward(creditCardNumber: string, reward: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${creditCardNumber}/reward/${reward}`, {});
+  shareReward(creditCardNumber: string, reward_confirmation: string): Observable<any> {
+
+
+    return this.http.put<any>(`${this.apiUrl}/${creditCardNumber}/reward/${reward_confirmation}`, {});
   }
+  getCreditCardByAccountNumber(accountNumber: String): Observable<any> {
+    // http://localhost:8765/account-contribution/credit-card/AN001
+    return this.http.get<string>(`${this.apiUrl}/accounts/${accountNumber}/credit-card/`);
+  }
+
 
 
   updateBeneficiaryAllocation(beneficiaryId: number, allocationPercentage: number): Observable<any> {

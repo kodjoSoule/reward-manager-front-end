@@ -1,4 +1,4 @@
-<ngx-ui-loader></ngx-ui-loader>
+<ngx-ui-loader> Loading </ngx-ui-loader>
 <!-- account-list.component.html -->
 <h3 class="mt-4">Listes des Comptes</h3>
 <!-- Bouton pour ouvrir la modal d'ajout de compte -->
@@ -18,12 +18,27 @@
 </div>
 
 <div class="row" *ngIf="accounts && accounts.length > 0">
-  <div class="col-md-4" *ngFor="let account of accounts">
-    <div>
+  <div
+    class="col-md-4"
+    *ngFor="
+      let account of accounts | paginate : { itemsPerPage: 6, currentPage: p }
+    "
+  >
+    <div class="mb-2">
       <!-- <app-account-details [account]="account"></app-account-details> -->
       <app-account-contribution-item
         [account]="account"
       ></app-account-contribution-item>
+    </div>
+  </div>
+
+  <div class="row mt-3" *ngIf="!loading && accounts.length > 0">
+    <div class="col-8 mx-auto text-center">
+      <pagination-controls
+        (pageChange)="p = $event"
+        previousLabel="Précédent"
+        nextLabel="Suivant"
+      ></pagination-controls>
     </div>
   </div>
 </div>

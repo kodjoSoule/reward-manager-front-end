@@ -49,46 +49,37 @@
           >
         </li>
 
-        <!-- <li class="nav-item" routerLinkActive="active">
+        <li class="nav-item" routerLinkActive="active">
           <a class="nav-link btn btn-light" routerLink="/account-contribution"
             >Contributions aux comptes</a
           >
-        </li> -->
+        </li>
 
         <!-- //<li class="nav-item" *ngIf="!isAuthenticated()"> -->
-        <!-- <li class="nav-item" routerLinkActive="active">
+        <li class="nav-item" routerLinkActive="active">
           <a class="nav-link btn btn-light" routerLink="/administration"
             >Administration</a
           >
-        </li> -->
+        </li>
 
         <!-- dropdown -->
-        <li routerLinkActive="active" class="nav-item dropdown text-center">
-          <button
-            class="btn btn-light dropdown-toggle"
-            type="button"
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle btn btn-light"
+            href="#"
+            id="navbarDropdown"
+            role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            Administration
-          </button>
-          <ul class="dropdown-menu">
-            <li routerLinkActive="active">
-              <a
-                class="dropdown-item"
-                routerLink="/benefit-restaurant/admin/list"
-                >Gestion des Restaurants</a
-              >
+            Comptes
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" routerLink="/account-list">Liste</a>
             </li>
             <li>
-              <a class="dropdown-item" routerLink="/account-contribution">
-                Gestion des Comptes
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" routerLink="/reward-manager">
-                Gestion des recompense
-              </a>
+              <a class="dropdown-item" routerLink="/account-add">Ajout</a>
             </li>
           </ul>
         </li>
@@ -113,3 +104,20 @@
      -->
   </div>
 </nav>
+
+<div class="btn-group">
+  <button
+    class="btn btn-secondary dropdown-toggle"
+    type="button"
+    data-bs-toggle="dropdown"
+    data-bs-auto-close="true"
+    aria-expanded="false"
+  >
+    Default dropdown
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Menu item</a></li>
+    <li><a class="dropdown-item" href="#">Menu item</a></li>
+    <li><a class="dropdown-item" href="#">Menu item</a></li>
+  </ul>
+</div>

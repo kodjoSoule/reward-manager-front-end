@@ -51,10 +51,19 @@
     </p>
 
     <!-- Afficher le message d'erreur -->
-    <div *ngIf="errorMessage" class="error-message mt-3">
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3" role="alert">
       <span class="error-icon">&#9888;</span>
-      {{ errorMessage }}
+      <strong>Erreur:</strong> {{ errorMessage }}
+      <br />
+      Veuillez vérifier vos informations ou réessayer ultérieurement.
     </div>
+
+    <!-- Afficher le message de succès -->
+    <div *ngIf="successMessage" class="alert alert-success mt-3" role="alert">
+      <span class="success-icon">&#10003;</span>
+      <strong>Succès:</strong> {{ successMessage }}
+    </div>
+
     <div class="d-grid gap-2 d-md-block mt-3">
       <span class="h2">Liste des Bénéficiaires</span>
       <button
@@ -68,9 +77,9 @@
         *ngIf="beneficiaries && beneficiaries.length !== 0"
         class="btn btn-dark"
         type="button"
-        (click)="shareReward()"
+        (click)="openShareRewardModal()"
       >
-        Partager la Récompense
+        Partager une Récompense
       </button>
     </div>
 

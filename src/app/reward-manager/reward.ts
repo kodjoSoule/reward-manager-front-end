@@ -11,9 +11,9 @@
 export interface Reward {
   id: number;
   reward_confirmation_number: number;
-  // reward_amount: number;
+  reward_amount?: number;
   merchant_number: number;
-  // reward_date: string;
+  reward_date?: string;
   credit_card_number: string;
   dining_amount: number;
   dining_date: string;

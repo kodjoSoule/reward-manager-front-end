@@ -32,5 +32,8 @@ export class RewardManagerService implements OnInit {
     return this.http.post(url, newReward);
   }
 
-  // Ajoutez d'autres méthodes selon les besoins
+
+  getRewardByCreditCardNumber(creditCardNumber: String): Observable<Reward[]> {
+    return this.http.get<any>(`${this.apiUrl}/rewards/credit-card/${creditCardNumber}`);
+  }
 }

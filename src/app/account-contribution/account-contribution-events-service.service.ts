@@ -32,7 +32,8 @@ export class AccountContributionEventsServiceService {
     this.beneficiariesUpdatedSource.next();
   }
 
-  emitRewardShared(): void {
-    this.rewardSharedSource.next();
+  emitRewardShared(selectedReward: any): void {
+    this.rewardSharedSource.next(selectedReward);
   }
+
 }

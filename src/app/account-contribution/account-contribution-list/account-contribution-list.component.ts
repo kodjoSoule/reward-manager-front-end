@@ -9,6 +9,7 @@ import { AccountContributionItemComponent } from '../account-contribution-item/a
 
 import { AccountContributionEventsServiceService } from '../account-contribution-events-service.service';
 import { NgxUiLoaderModule, NgxUiLoaderService } from 'ngx-ui-loader';
+import { NgxPaginationModule } from 'ngx-pagination';
 @Component({
   selector: 'app-account-contribution-list',
   providers: [
@@ -18,7 +19,8 @@ import { NgxUiLoaderModule, NgxUiLoaderService } from 'ngx-ui-loader';
   standalone: true,
   imports: [
     NgxUiLoaderModule,
-    AccountDetailsComponent, CommonModule,AccountContributionItemComponent
+    AccountDetailsComponent, CommonModule,AccountContributionItemComponent,
+    NgxPaginationModule
   ],
   templateUrl: './account-contribution-list.component.html',
   styleUrl: './account-contribution-list.component.css'
@@ -26,6 +28,7 @@ import { NgxUiLoaderModule, NgxUiLoaderService } from 'ngx-ui-loader';
 export class AccountContributionListComponent implements OnInit{
   accounts: Account[] = [];
   loading :boolean = false ;
+  p: number = 1;
 
   constructor(private accountService: AccountContributionService,
     private eventsService :AccountContributionEventsServiceService,
@@ -51,9 +54,7 @@ export class AccountContributionListComponent implements OnInit{
    // Méthode appelée lorsqu'un compte est créé avec succès
    accountCreatedSuccessfully(): void {
     // Actualiser la liste des comptes
-    console.log('sss');
     this.loadAccounts();
-    alert('ok');
   }
 
   private loadAccounts(): void {
