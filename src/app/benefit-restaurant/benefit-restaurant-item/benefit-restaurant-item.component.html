@@ -1,18 +1,35 @@
-<div class="card mb-3">
+<div
+  class="card mb-3 shadow"
+  (mouseover)="onMouseOver()"
+  (mouseout)="onMouseOut()"
+>
   <div class="card-body">
     <h5 class="card-title">{{ restaurant.name }}</h5>
     <p class="card-text">
-      Merchant Number: {{ restaurant.merchant_number }}<br />
-      Benefit Percentage: {{ restaurant.benefit_percentage }}%<br />
-      Availability Policy: {{ restaurant.benefit_availability_policy }}
+      <strong>Numéro du Marchand:</strong> {{ restaurant.merchant_number
+      }}<br />
+      <strong>Pourcentage de Récompense:</strong>
+      {{ restaurant.benefit_percentage | number : "1.0-0" }}%<br />
+      <strong>Disponibilité :</strong>
+      <strong>
+        <ng-container
+          *ngIf="
+            restaurant.benefit_availability_policy == 'allowed';
+            else notAvailable
+          "
+        >
+          <span class="text-success">Disponible</span>
+        </ng-container>
+        <ng-template #notAvailable>
+          <span class="text-danger">Non Disponible</span>
+        </ng-template>
+      </strong>
     </p>
     <p>
       <button class="btn btn-primary me-3" (click)="viewDetails()">
-        Details
+        Détails
       </button>
-      <!-- <button class="btn btn-danger me-3" (click)="updateAvailability()">
-        Update Availability
-      </button> -->
+      <!-- <button class="btn btn-danger me-3" (click)="updateAvailability()">Mettre à Jour la Disponibilité</button> -->
     </p>
   </div>
 </div>

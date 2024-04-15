@@ -20,7 +20,7 @@ import { LoginComponent } from './component/login/login.component';
 import { AdministrationComponent } from './administration/administration.component';
 import { AdminBenefitRestaurantListComponent } from './benefit-restaurant/admin/admin-benefit-restaurant-list/admin-benefit-restaurant-list.component';
 export const routes: Routes = [
-{ path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
 
 { path: 'about', title: 'A propos', component: AboutComponent},
 { path: 'login', component: LoginComponent },
@@ -44,6 +44,6 @@ export const routes: Routes = [
   // { path: 'benefit-restaurant-list', title: 'Listes des produits', loadChildren: () =>AdminBenefitRestaurantListComponent },
   // { path: 'benefit-restaurant/admin/list', loadChil },
   { path: 'benefit-restaurant/admin/list', component: AdminBenefitRestaurantListComponent },
-  { path: '', redirectTo: '/benefit-restaurant-list', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent }
 ];

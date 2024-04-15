@@ -33,8 +33,8 @@ export class BenefitRestaurantListComponent implements OnInit {
 
   ngOnInit(): void {
     this.ngxLoader.start();
-    this.loadRestaurants();
-    // this.loadRestaurantsTest();
+    // this.loadRestaurants();
+    this.loadRestaurantsTest();
   }
 
   loadRestaurantsTest() {
@@ -56,6 +56,7 @@ export class BenefitRestaurantListComponent implements OnInit {
     // Affectez les données de test à la propriété restaurants
     this.restaurants = testData;
     this.loading = false; // Set loading to false after data is loaded
+    this.ngxLoader.stop();
   }
 
   loadRestaurants() {

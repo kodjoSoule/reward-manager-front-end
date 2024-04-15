@@ -1,37 +1,49 @@
-<!-- benefit-restaurant-list.component.html -->
-<ngx-ui-loader> Loading </ngx-ui-loader>
-<!-- | paginate : { itemsPerPage: 16, currentPage: p } -->
-<div class="row" *ngIf="!loading && restaurants.length > 0; else noRestaurants">
-  <h1>Liste des Restaurants</h1>
+<div class="container">
+  <ngx-ui-loader class="loader">
+    <span class="loading-text">Chargement en cours...</span>
+  </ngx-ui-loader>
+
   <div
-    *ngFor="
-      let restaurant of restaurants
-        | paginate : { itemsPerPage: 16, currentPage: p }
-    "
-    class="col-md-4 mt-1 mb-2"
+    class="row mt-4"
+    *ngIf="!loading && restaurants.length > 0; else noRestaurants"
   >
-    <app-benefit-restaurant-item
-      [restaurant]="restaurant"
-    ></app-benefit-restaurant-item>
-  </div>
-</div>
+    <div class="col-12">
+      <h1 class="text-center text-primary">
+        Découvrez nos Restaurants Partenaires
+      </h1>
+    </div>
 
-<ng-template #noRestaurants>
-  <div class="col-md-12 text-center">
-    <p>
-      <!-- Aucun restaurant n'est actuellement disponible. Nous vous invitons à
-      réessayer ultérieurement. -->
-      {{ errorMessage }}
-    </p>
+    <div
+      *ngFor="
+        let restaurant of restaurants
+          | paginate : { itemsPerPage: 16, currentPage: p }
+      "
+      class="col-md-4 mt-3"
+    >
+      <app-benefit-restaurant-item
+        [restaurant]="restaurant"
+      ></app-benefit-restaurant-item>
+    </div>
   </div>
-</ng-template>
 
-<div class="row" *ngIf="!loading && restaurants.length > 0">
-  <div class="col-8 mx-auto text-center">
-    <pagination-controls
-      (pageChange)="p = $event"
-      previousLabel="Précédent"
-      nextLabel="Suivant"
-    ></pagination-controls>
+  <ng-template #noRestaurants>
+    <div class="col-12 text-center mt-5">
+      <p class="text-muted">
+        Oh non ! Il semble qu'aucun restaurant ne soit disponible pour le
+        moment.
+      </p>
+      <p class="text-danger">{{ errorMessage }}</p>
+    </div>
+  </ng-template>
+
+  <div class="row mt-4" *ngIf="!loading && restaurants.length > 0">
+    <div class="col-12 text-center">
+      <pagination-controls
+        (pageChange)="p = $event"
+        previousLabel="Précédent"
+        nextLabel="Suivant"
+        class="pagination-controls"
+      ></pagination-controls>
+    </div>
   </div>
 </div>

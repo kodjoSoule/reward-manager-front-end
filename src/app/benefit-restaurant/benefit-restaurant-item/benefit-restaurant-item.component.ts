@@ -30,10 +30,28 @@ viewDetails(): void {
   // alert(this.restaurant.merchant_number)
   const modalRef = this.modalService.open(BenefitRestaurantDetailsComponent, { centered: true });
   modalRef.componentInstance.restaurantNumber = this.restaurant.merchant_number;
+  modalRef.componentInstance.restaurant = this.restaurant;
   console.log(this.restaurant.merchant_number);
   // modalRef.componentInstance.restaurant = this.restaurant;
 }
 updateAvailability(): void {
 //   this.router.navigateByUrl(`/products/${this.product._id}`, { state: { product: this.product } });
 }
+
+onMouseOver(): void {
+  // Fonction exécutée lorsque la souris survole l'élément
+  console.log("La souris survole l'élément.");
+  // Vous pouvez ajouter ici d'autres actions à exécuter lors du survol
 }
+
+onMouseOut(): void {
+  // Fonction exécutée lorsque la souris quitte l'élément
+  console.log("La souris quitte l'élément.");
+  // Vous pouvez ajouter ici d'autres actions à exécuter lorsque la souris quitte
+}
+
+}
+
+
+
+
